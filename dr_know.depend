@@ -1,9 +1,12 @@
 # depslib dependency file v1.0
-1402896822 source:/home/m4heshd/Documents/git/dr_know/main.c
+1403277948 source:/home/m4heshd/Documents/git/dr_know/main.c
 	<stdio.h>
 	<stdlib.h>
 	<gtk/gtk.h>
 	<gdk/gdk.h>
+	<curl/curl.h>
+	<string.h>
+	"cJSON.c"
 
 1396029160 /usr/include/gtk-3.0/gtk/gtk.h
 	<gdk/gdk.h>
@@ -2453,4 +2456,16 @@
 
 1396029160 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h
 	<gtk/gtkseparator.h>
+
+1376923612 /home/m4heshd/Documents/git/dr_know/cJSON.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<float.h>
+	<limits.h>
+	<ctype.h>
+	"cJSON.h"
+
+1376484875 /home/m4heshd/Documents/git/dr_know/cJSON.h
 
