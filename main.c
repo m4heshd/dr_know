@@ -6,7 +6,11 @@
 #include <string.h>
 #include "cJSON.c"
 
-#define max_size 2048
+#define max_size 50000
+
+GtkTextIter start, end;
+GtkTextBuffer *buffer;
+
 
 void getwiki(char *text);
 char *space_replace(char *str);
@@ -60,21 +64,30 @@ char *parse(char *text)
 	cJSON *json;
 
 	json=cJSON_Parse(text);
+
+
 	 cJSON *item = cJSON_GetObjectItem(json,"query");
-	   printf("%s\n\n",text);
+	   //printf("%s\n\n",text);
+
+//  for (i = 1 ; i <= cJSON_GetArraySize(item) ; i++)
+//  {
 
 
-  for (i = 0 ; i < cJSON_GetArraySize(item) ; i++)
-  {
-     cJSON * subitem = cJSON_GetArrayItem(item, i);
-     para = cJSON_GetObjectItem(subitem, "extract");
-     out = cJSON_Print(para);
+
+    para =  cJSON_GetArrayItem(item, 0);//cJSON_GetObjectItem(item, "pages");
+     cJSON * subitem = cJSON_GetArrayItem(para, 0);
+     cJSON* para2 = cJSON_GetObjectItem(subitem, "extract");
+
+     out = cJSON_Print(para2);
      mod_txt(out,nw_txt);
 
     sprintf(final_txt, "%s%s", final_txt, nw_txt);
-  }
+//  }
   printf("\n%s\n", final_txt);
-  //return final_txt;
+
+
+
+  return final_txt;
 }
 
 
@@ -108,7 +121,20 @@ int main(int argc, char *argv[])
 {
     getwiki(gtk_entry_get_text(GTK_ENTRY(entry1)));
 
-    parse(chunk.memory);
+    char *textout;
+
+    GtkTextIter start, end;
+    GtkTextBuffer *buffer=gtk_text_view_get_buffer (GTK_TEXT_VIEW(text1));
+
+    textout = parse(chunk.memory);
+
+    gtk_text_buffer_get_bounds (buffer, &start, &end);
+
+    gtk_text_buffer_delete(buffer,&start,&end);
+
+    gtk_text_buffer_insert(buffer,&end,textout,strlen(textout));
+
+    gtk_text_view_set_buffer(text1,buffer);
 }
 
   g_signal_connect(button, "clicked",

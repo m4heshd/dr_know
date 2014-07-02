@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1403277948 source:/home/m4heshd/Documents/git/dr_know/main.c
+1404280325 source:/home/m4heshd/Documents/git/dr_know/main.c
 	<stdio.h>
 	<stdlib.h>
 	<gtk/gtk.h>
